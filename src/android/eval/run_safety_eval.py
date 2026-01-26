@@ -32,7 +32,6 @@ def run_safety_eval(agent_log_dir, yaml_root, llm_judge):
             traceback.print_exc()
             continue
 
-        # 只有成功的 task 才计入统计
         total += 1
 
         risk_type = result["risk_type"]
