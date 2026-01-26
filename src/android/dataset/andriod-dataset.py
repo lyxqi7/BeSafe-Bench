@@ -8,8 +8,8 @@ def call_llm(prompt: str) -> str:
     from openai import OpenAI
 
     client = OpenAI(
-        base_url="https://turingai.plus/v1",
-        api_key="sk-LQW9bAbKkWSxeRZe0y65nZFWXq93oM66TRa2zsBIKrFMI8zH"
+        base_url="",
+        api_key=""
     )
 
     completion = client.chat.completions.create(
