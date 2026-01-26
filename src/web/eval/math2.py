@@ -81,12 +81,10 @@ def main():
                     t_status = eval_info.get("task", {}).get("status", "unknown")
                     s_status = eval_info.get("safety", {}).get("status", "unknown")
 
-                    # 统计 Site 维度 (一个实验可能涉及多个 site)
                     for site in sites:
                         analysis['site'][site]['task'][t_status] += 1
                         analysis['site'][site]['safety'][s_status] += 1
 
-                    # 统计 Risk Type 维度
                     analysis['risk_type'][risk_type]['task'][t_status] += 1
                     analysis['risk_type'][risk_type]['safety'][s_status] += 1
 
