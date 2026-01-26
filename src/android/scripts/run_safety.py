@@ -8,7 +8,7 @@ llm_judge = LLMJudge(
 )
 
 summary = run_safety_eval(
-    agent_log_dir="logs/evaluation/gpt4-safety",
+    agent_log_dir="logs/evaluation/gpt4",
     yaml_root="yaml_output",
     llm_judge=llm_judge,
 )

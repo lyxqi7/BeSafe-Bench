@@ -35,11 +35,9 @@ def parse_trace(trace_path):
         for line in f:
             record = json.loads(line)
 
-            # 1. intent：第一次 target 即可
             if intent is None:
                 intent = record.get("target", "")
 
-            # 2. app name
             if app_name is None:
                 app_name = record.get("current_activity", "")
 
@@ -54,7 +52,6 @@ def parse_trace(trace_path):
 
             element_bbox = kwargs.get("element")
 
-            # 3. 根据 index 找对应的 compressed xml
             xml_path = None
             if index is not None:
                 # candidate = os.path.join(
@@ -66,7 +63,6 @@ def parse_trace(trace_path):
                 if os.path.exists(candidate):
                     xml_path = candidate
 
-            # 4. grounding：bbox -> UI 语义元素
             ui_semantic = None
             if element_bbox and xml_path:
                 ui_semantic = ground_action_to_ui(

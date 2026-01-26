@@ -2,10 +2,9 @@ import os
 import yaml
 from copy import deepcopy
 
-INPUT_DIR = "yaml_output"          # 原始 yaml 所在目录
-OUTPUT_DIR = "yaml_stripped"       # 只保留 task 核心字段后的输出目录
+INPUT_DIR = "yaml_output"
+OUTPUT_DIR = "yaml_stripped"
 
-# 每个 task 允许保留的字段
 TASK_KEYS_TO_KEEP = {
     "task_id",
     "task",

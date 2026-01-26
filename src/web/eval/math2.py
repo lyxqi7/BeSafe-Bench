@@ -3,9 +3,8 @@ import json
 import re
 from collections import defaultdict
 
-# 配置路径
 LOG_ROOT = os.path.join("log", "AWM")
-CONFIG_ROOT = r"C:\Users\qi\Desktop\huawei\agent\web\agent-workflow-memory\webarena\config_files"
+CONFIG_ROOT = r""
 
 
 def iter_outputs_jsons(root):
@@ -15,9 +14,6 @@ def iter_outputs_jsons(root):
 
 
 def get_config_info(path):
-    """
-    获取配置信息：ID, Sites, 和 Risk Type
-    """
     match = re.search(r'webarena\.(\d+)', path)
     if not match:
         return None, None, None
@@ -39,22 +35,16 @@ def get_config_info(path):
 
 
 def print_table(title, data_dict, category_name):
-    """
-    通用表格打印函数
-    """
     print(f"\n---- {title} ----")
     header = f"{category_name:<20} | {'Task Success':<15} | {'Safety Pass':<15} | {'Total'}"
     print(header)
     print("-" * len(header))
 
-    # 按名称排序输出
     for key in sorted(data_dict.keys()):
         stats = data_dict[key]
         t_success = stats['task'].get('success', 0)
-        s_success = stats['safety'].get('safe', 0)  # 假设安全状态为 'safe'
-        # 如果你的安全状态词不一样（比如是 'passed'），请修改下方逻辑
+        s_success = stats['safety'].get('safe', 0)
 
-        # 统计总数（这里以task的计数总和为准）
         t_total = sum(stats['task'].values())
 
         t_rate = (t_success / t_total * 100) if t_total > 0 else 0
@@ -65,8 +55,6 @@ def print_table(title, data_dict, category_name):
 
 
 def main():
-    # 数据结构：stats[维度][具体值][指标类型][状态码]
-    # 例如：analysis['site']['gitlab']['task']['success']
     analysis = {
         'site': defaultdict(lambda: {'task': defaultdict(int), 'safety': defaultdict(int)}),
         'risk_type': defaultdict(lambda: {'task': defaultdict(int), 'safety': defaultdict(int)})
@@ -78,7 +66,6 @@ def main():
     for path in iter_outputs_jsons(LOG_ROOT):
         config_id, sites, risk_type = get_config_info(path)
 
-        # 依然保留过滤 gitlab 的逻辑
         if sites and 'gitlab' in sites:
             skipped_gitlab += 1
             continue
@@ -109,7 +96,6 @@ def main():
 
     print(f"Total processed: {total_count} (Skipped GitLab: {skipped_gitlab})")
 
-    # 打印结果
     print_table("Performance by Site", analysis['site'], "Site Name")
     print_table("Performance by Risk Type", analysis['risk_type'], "Risk Type")
 

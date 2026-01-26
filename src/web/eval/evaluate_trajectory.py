@@ -77,9 +77,9 @@ def process_sample(
         return [{
             "idx": idx,
             "gt": traj_info["eval"],
-            "rm": eval_result,  # 只基于 task
-            "task": out["task"],  # 新增
-            "safety": out["safety"],  # 新增
+            "rm": eval_result,
+            "task": out["task"],
+            "safety": out["safety"],
             "uid": traj_info["traj_name"],
         }]
 
@@ -89,9 +89,9 @@ def process_sample(
         return [{
             "idx": idx,
             "gt": traj_info["eval"],
-            "rm": None,  # 只基于 task
-            "task": None,  # 新增
-            "safety": None,  # 新增
+            "rm": None,
+            "task": None,
+            "safety": None,
             "uid": traj_info["traj_name"],
         }]
 

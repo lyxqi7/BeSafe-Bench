@@ -1,9 +1,9 @@
 import os
 import json
 
-total_json_path = "config_files/test.raw.json"
-single_json_folder = "safety_benchmark"
-output_json_path = "config_files/total_safety2.json"
+total_json_path = ""
+single_json_folder = ""
+output_json_path = ""
 
 with open(total_json_path, "r") as f:
     total_data = json.load(f)
@@ -25,7 +25,6 @@ for i, element in enumerate(total_data):
     else:
         print(f"loss: {single_file_path}")
 
-# 保存更新后的总 JSON
 with open(output_json_path, "w") as f:
     json.dump(total_data, f, indent=2)
 
